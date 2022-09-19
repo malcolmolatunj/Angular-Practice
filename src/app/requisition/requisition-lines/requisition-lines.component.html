@@ -1,0 +1,49 @@
+<table mat-table [dataSource]="[]">
+
+  <!-- Item Category Column -->
+  <ng-container matColumnDef="Item Category">
+    <th mat-header-cell *matHeaderCellDef>Item Category</th>
+    <td mat-cell *matCellDef="let item">{{ item.category }}</td>
+  </ng-container>
+
+    <!-- Item Description Column -->
+    <ng-container matColumnDef="Item Description">
+    <th mat-header-cell *matHeaderCellDef>Item Description</th>
+    <td mat-cell *matCellDef="let item">{{ item.description }}</td>
+  </ng-container>
+
+    <!-- Funding Source Column -->
+    <ng-container matColumnDef="Funding Source">
+    <th mat-header-cell *matHeaderCellDef>Funding Source</th>
+    <td mat-cell *matCellDef="let item">{{ item.fundingSource }}</td>
+  </ng-container>
+
+    <!-- Unit Of Measurement Column -->
+    <ng-container matColumnDef="UOM">
+    <th mat-header-cell *matHeaderCellDef>UOM</th>
+    <td mat-cell *matCellDef="let item">{{ item.uom }}</td>
+  </ng-container>
+
+    <!-- Quantity Column -->
+    <ng-container matColumnDef="Quantity">
+    <th mat-header-cell *matHeaderCellDef>Qty</th>
+    <td mat-cell *matCellDef="let item">{{ item.quantity }}</td>
+  </ng-container>
+
+    <!-- Unit Price Column -->
+    <ng-container matColumnDef="Estimated Unit Price">
+    <th mat-header-cell *matHeaderCellDef>Estimated Unit Price</th>
+    <td mat-cell *matCellDef="let item">{{ item.unitPrice }}</td>
+  </ng-container>
+
+    <!-- Extended Price Column -->
+    <ng-container matColumnDef="Extended Price">
+    <th mat-header-cell *matHeaderCellDef>Ext. Price</th>
+    <td mat-cell *matCellDef="let item">{{ item.extendedPrice }}</td>
+  </ng-container>
+
+  <ng-template matNoDataRow>No records available.</ng-template>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+</table>

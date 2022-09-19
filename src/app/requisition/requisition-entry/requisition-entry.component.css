@@ -1,0 +1,25 @@
+.header {
+  background-color: white;
+}
+
+.spaced-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container {
+  display: flex;
+  gap: 5px;
+}
+
+.align-right {
+  justify-content: right;
+}
+
+.mr-20 {
+  margin-right: 20px;
+}
+
+mat-expansion-panel {
+  margin: 10px;
+}

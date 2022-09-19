@@ -1,0 +1,17 @@
+.header-form {
+  background-color: white;
+  margin: 10px;
+  padding: 20px 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  grid-column-gap: 1rem;
+  align-items: center;
+}
+
+mat-form-field {
+  padding: 10px;
+}
+
+.error {
+  color: var(--warn-color)
+}

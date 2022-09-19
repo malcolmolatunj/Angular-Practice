@@ -1,0 +1,12 @@
+mat-nav-list {
+  padding-top: 0;
+  padding-bottom: 8px;
+}
+
+mat-list-item {
+  background-color: white;
+}
+
+mat-list-item.mat-body-strong {
+  cursor: default;
+}

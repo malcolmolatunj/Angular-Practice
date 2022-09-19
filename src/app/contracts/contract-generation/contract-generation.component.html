@@ -1,0 +1,16 @@
+<form [formGroup]="contractForm" (submit)="onSubmit()" (reset)="onClear()">
+  <mat-toolbar class="header">
+    <div><span>Contract Generation</span></div>
+    <div>
+      <button mat-raised-button color="accent">Save</button>
+      <button mat-raised-button color="accent" type="reset">Clear</button>
+      <button mat-raised-button color="accent">Cancel Contract</button>
+      <button mat-raised-button color="accent">Return to PJF</button>
+      <button mat-raised-button color="accent" type="submit">
+        Submit For Approval
+      </button>
+    </div>
+  </mat-toolbar>
+  <app-contract-header formGroupName="header"></app-contract-header>
+</form>
+

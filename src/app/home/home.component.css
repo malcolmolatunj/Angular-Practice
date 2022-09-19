@@ -1,0 +1,26 @@
+.content {
+  background-color: #f7f7f7;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 50px;
+}
+
+.dashboard {
+  background-color: white;
+  width: 1140px;
+  height: 541.25px;
+  margin-left: 5px;
+}
+
+.links {
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+mat-toolbar {
+  background-color: white;
+}

@@ -1,0 +1,13 @@
+<mat-nav-list>
+  <mat-list-item class="mat-body-strong" disableRipple="true">{{
+    listTitle
+  }}</mat-list-item>
+  <mat-divider></mat-divider>
+  <ng-container *ngFor="let item of items; let i = index">
+    <mat-list-item>
+      <mat-icon matListIcon [color]="iconColor">{{ icon }}</mat-icon>
+      <button mat-button color="primary">{{ item.name }}</button>
+    </mat-list-item>
+    <mat-divider *ngIf="i !== items.length - 1"></mat-divider>
+  </ng-container>
+</mat-nav-list>

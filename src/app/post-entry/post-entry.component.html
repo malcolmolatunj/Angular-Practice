@@ -1,0 +1,15 @@
+<form [formGroup]="postForm" (submit)="onSubmit()" (reset)="onClear()">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput required formControlName="title" />
+    <mat-error *ngIf="title.errors?.required">Title is required.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Body</mat-label>
+    <textarea matInput required formControlName="body"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit">Save</button>
+  <button mat-raised-button color="accent" type="reset">Clear</button>
+</form>

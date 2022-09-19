@@ -1,0 +1,16 @@
+<section>
+  <ng-container [formGroup]="parentForm">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Roles</mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-slide-toggle
+        *ngFor="let role of roles$ | async"
+        [id]="role.id.toString()"
+        [checked]="rolesInclude(role.id)"
+        (change)="toggleRole($event, role.id)"
+        >{{ role.name }}</mat-slide-toggle
+      >
+    </mat-expansion-panel>
+  </ng-container>
+</section>

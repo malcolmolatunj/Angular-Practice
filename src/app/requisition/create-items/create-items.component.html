@@ -1,0 +1,54 @@
+<h2 mat-dialog-title>Create Item</h2>
+<div mat-dialog-content>
+  <form [formGroup]="item">
+    <mat-form-field color="accent">
+      <mat-label>Item Category</mat-label>
+      <mat-select>
+        <mat-option>Office Supplies</mat-option>
+        <mat-option>Rent</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <mat-label>UOM</mat-label>
+      <mat-select>
+        <mat-option>Each</mat-option>
+        <mat-option>Night</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <mat-label>Quantity</mat-label>
+      <input type="number" matInput />
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <mat-label>Notes</mat-label>
+      <textarea matInput rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <mat-label>Item Description</mat-label>
+      <textarea matInput rows="4"></textarea>
+    </mat-form-field>
+
+    <mat-form-field color="accent">
+      <mat-label>Estimated Unit Price</mat-label>
+      <input type="number" matInput />
+    </mat-form-field>
+
+    <mat-checkbox>In-Kind Purchase</mat-checkbox>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="accent">Save and Continue</button>
+  <button
+    mat-raised-button
+    mat-dialog-close
+    color="accent"
+    (click)="onSaveAndCreateNew()"
+  >
+    Save and Create New Item
+  </button>
+</div>

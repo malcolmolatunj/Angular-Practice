@@ -1,0 +1,40 @@
+.header {
+  background-color: white;
+}
+
+.spaced-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.align-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: end;
+}
+
+table,
+mat-paginator {
+  margin: auto;
+  width: 95%;
+}
+
+table {
+  margin-top: 1em;
+}
+
+.mat-column-email {
+  cursor: pointer;
+}
+
+mat-spinner {
+  margin-top: 10rem;
+  margin-left: 50%;
+}

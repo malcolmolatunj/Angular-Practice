@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "name": "Cameroon",
+    "alpha2code": "CM"
+  },
+  {
+    "id": 2,
+    "name": "DRC",
+    "alpha2code": "CD"
+  },
+  {
+    "id": 3,
+    "name": "Lesotho",
+    "alpha2code": "LS"
+  },
+  {
+    "id": 4,
+    "name": "Uganda",
+    "alpha2code": "UG"
+  },
+  {
+    "id": 5,
+    "name": "United States",
+    "alpha2code": "US"
+  }
+]

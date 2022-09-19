@@ -1,0 +1,102 @@
+[
+  {
+    "id": 1,
+    "code": "USD",
+    "exchangeRate": 1
+  },
+  {
+    "id": 2,
+    "code": "LSL",
+    "exchangeRate": 0.069446
+  },
+  {
+    "id": 3,
+    "code": "KES",
+    "exchangeRate": 0.009203
+  },
+  {
+    "id": 4,
+    "code": "TZS",
+    "exchangeRate": 0.000431
+  },
+  {
+    "id": 5,
+    "code": "MZN",
+    "exchangeRate": 0.015976
+  },
+  {
+    "id": 6,
+    "code": "MWK",
+    "exchangeRate": 0.001244
+  },
+  {
+    "id": 7,
+    "code": "XOF",
+    "exchangeRate": 0.001814
+  },
+  {
+    "id": 8,
+    "code": "UGX",
+    "exchangeRate": 0.000282
+  },
+  {
+    "id": 9,
+    "code": "CHF",
+    "exchangeRate": 0.913900
+  },
+  {
+    "id": 10,
+    "code": "RWF",
+    "exchangeRate": 0.001001
+  },
+  {
+    "id": 11,
+    "code": "SZL",
+    "exchangeRate": 0.069446
+  },
+  {
+    "id": 12,
+    "code": "ZMK",
+    "exchangeRate": 0.049405
+  },
+  {
+    "id": 13,
+    "code": "EUR",
+    "exchangeRate": 0.840092
+  },
+  {
+    "id": 14,
+    "code": "ZWL",
+    "exchangeRate": 0.049405
+  },
+  {
+    "id": 15,
+    "code": "CDF",
+    "exchangeRate": 0.000500
+  },
+  {
+    "id": 16,
+    "code": "GBP",
+    "exchangeRate": 0.720818
+  },
+  {
+    "id": 17,
+    "code": "INR",
+    "exchangeRate": 0.013534
+  },
+  {
+    "id": 18,
+    "code": "ZAR",
+    "exchangeRate": 0.001814
+  },
+  {
+    "id": 19,
+    "code": "XAF",
+    "exchangeRate": 0.001814
+  },
+  {
+    "id": 20,
+    "code": "NGN",
+    "exchangeRate": 0.002456
+  }
+]

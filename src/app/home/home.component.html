@@ -1,0 +1,21 @@
+<mat-toolbar class="mat-title">Dashboard</mat-toolbar>
+<div class="content">
+  <div class="links">
+    <div class="task-list">
+      <app-item-list
+        listTitle="Tasks"
+        [items]="tasks"
+        icon="task"
+        iconColor="accent"
+      ></app-item-list>
+    </div>
+    <div class="status-list">
+      <app-item-list
+        listTitle="Status"
+        [items]="statuses"
+        icon="done outline"
+      ></app-item-list>
+    </div>
+  </div>
+  <div class="dashboard"></div>
+</div>

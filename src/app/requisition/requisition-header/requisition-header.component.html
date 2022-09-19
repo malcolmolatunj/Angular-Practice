@@ -1,0 +1,74 @@
+<ng-container [formGroup]="parentForm">
+  <div [formGroupName]="formGroupName" class="header-form">
+    <mat-form-field>
+      <mat-label>Requisition #</mat-label>
+      <input matInput formControlName="id" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput required formControlName="title" />
+      <mat-error *ngIf="title.errors?.required || title.errors?.isBlank">A title is required!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Currency</mat-label>
+      <mat-select required formControlName="currency">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let currency of currencies$ | async" [value]="currency.id">{{ currency.code }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="currency.errors?.required">Please select a currency!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Required Date</mat-label>
+      <input matInput required formControlName="requiredDate" [matDatepicker]="picker"/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="requiredDate.errors?.required">Please select a date!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Requested By</mat-label>
+      <input matInput formControlName="requestedBy" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Requested For</mat-label>
+      <mat-select required formControlName="requestedFor">
+        <mat-option *ngFor="let user of users$ | async" [value]="user.id">{{ user.firstName }} {{ user.lastName }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="requestedFor.errors?.required">Please select a name!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Procuring For Office Location</mat-label>
+      <mat-select #selectedOffice required formControlName="office">
+        <mat-option *ngFor="let office of offices$ | async" [value]="office.id">{{ office.name }}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="office.errors?.required">Please select an office!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Selection Method</mat-label>
+      <mat-select formControlName="selectionMethod">
+        <mat-option></mat-option>
+        <mat-option value="1">Micro-purchase</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="selectedOffice.value === 1">
+      <mat-label>Department</mat-label>
+      <mat-select formControlName="dept">
+        <mat-option></mat-option>
+        <mat-option value="1">ACIO</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+    <mat-label>Status</mat-label>
+    <input matInput formControlName="status" />
+  </mat-form-field>
+  </div>
+</ng-container>
+<!-- <pre>{{ selectedOffice }}</pre> -->

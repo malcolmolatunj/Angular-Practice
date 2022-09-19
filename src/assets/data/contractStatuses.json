@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "status": "Contract Being Generated"
+  },
+  {
+    "id": 2,
+    "status": "Contract In Approval"
+  },
+  {
+    "id": 3,
+    "status": "Contract Approved"
+  },
+  {
+    "id": 4,
+    "status": "Contract Active"
+  },
+  {
+    "id": 5,
+    "status": "Contract Expired"
+  },
+  {
+    "id": 6,
+    "status": "Contract Closed"
+  }
+]

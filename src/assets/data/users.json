@@ -1,0 +1,21 @@
+[
+  {
+    "email": "molatunji@pedaids.org",
+    "firstName": "Malcolm",
+    "lastName": "Olatunji",
+    "id": 1,
+    "title": "Mr.",
+    "countryId": 5,
+    "languageCode": "en",
+    "isDiscontinued": false,
+    "substituteUserId": null
+  },
+  {
+    "email": "pbryant@pedaids.org",
+    "firstName": "Parker",
+    "lastName": "Bryant",
+    "id": 2,
+    "isDiscontinued": false,
+    "substituteUserId": 1
+  }
+]

@@ -1,0 +1,148 @@
+<ng-container [formGroup]="parentForm">
+  <div [formGroupName]="formGroupName" class="header-form">
+    <mat-form-field>
+      <mat-label>First Name</mat-label>
+      <input matInput required formControlName="firstName" #firstname />
+      <mat-hint
+        >Max. 50 characters. {{ firstname.value?.length }} / 50</mat-hint
+      >
+      <mat-error *ngIf="firstName.errors?.required"
+        >First name is required.</mat-error
+      >
+      <mat-error *ngIf="firstName.errors?.isBlank"
+        >First name is required.</mat-error
+      >
+      <mat-error *ngIf="firstName.errors?.maxlength"
+        >First name cannot exceed
+        {{ firstName.errors.maxlength.requiredLength }} characters.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Last Name</mat-label>
+      <input matInput required formControlName="lastName" #lastname />
+      <mat-hint>Max. 50 characters. {{ lastname.value?.length }} / 50</mat-hint>
+      <mat-error *ngIf="lastName.errors?.required"
+        >Last name is required.</mat-error
+      >
+      <mat-error *ngIf="lastName.errors?.isBlank"
+        >Last name is required.</mat-error
+      >
+      <mat-error *ngIf="lastName.errors?.maxlength"
+        >Last name cannot exceed
+        {{ lastName.errors.maxlength.requiredLength }} characters.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput required formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput required formControlName="email" />
+      <mat-hint *ngIf="email.pending">Checking...</mat-hint>
+      <mat-error *ngIf="email.errors?.required"
+        >An email address is required.</mat-error
+      >
+      <mat-error *ngIf="email.errors?.email">Invalid email address!</mat-error>
+      <mat-error *ngIf="email.errors?.nameTaken"
+        >A profile with this email already exists!</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>User Name</mat-label>
+      <input matInput formControlName="username" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput required type="password" formControlName="password" />
+      <mat-hint
+        >8-20 characters, at least 1 digit, 1 lowercase letter, & 1 capital
+        letter.</mat-hint
+      >
+      <mat-error *ngIf="password.errors?.required"
+        >A password is required</mat-error
+      >
+      <mat-error *ngIf="password.errors?.minlength"
+        >Password must be at least
+        {{ password.errors.minlength.requiredLength }} characters!</mat-error
+      >
+      <mat-error *ngIf="password.errors?.maxlength"
+        >Password cannot exceed
+        {{ password.errors.maxlength.requiredLength }} characters!</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Confirm Password</mat-label>
+      <input
+        matInput
+        required
+        type="password"
+        formControlName="confirmPassword"
+      />
+      <mat-hint *ngIf="parentForm.errors?.confirmEqual" class="error"
+        >passwords must match</mat-hint
+      >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country</mat-label>
+      <mat-select required formControlName="country">
+        <mat-option></mat-option>
+        <mat-option
+          *ngFor="let country of countries$ | async"
+          [value]="country.id"
+          >{{ country.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Language</mat-label>
+      <mat-select formControlName="language" required>
+        <mat-option
+          *ngFor="let language of languages$ | async"
+          [value]="language.id"
+          >{{ language.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Country Office</mat-label>
+      <mat-select required formControlName="countryOffice">
+        <mat-option></mat-option>
+        <mat-option
+          *ngFor="let office of offices$ | async"
+          [value]="office.id"
+          >{{ office.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isGlobalUser">Global Access</mat-checkbox>
+    <mat-checkbox formControlName="isOOF">User Status</mat-checkbox>
+
+    <mat-form-field *ngIf="isOOF.value">
+      <mat-label>Substitute</mat-label>
+      <mat-select formControlName="substituteUser">
+        <mat-option
+          *ngFor="let user of substitutes$ | async"
+          [value]="user.id"
+          >{{ user.email }}</mat-option
+        >
+      </mat-select>
+      <mat-hint *ngIf="substitute.errors?.circular">Circular reference detected!</mat-hint>
+    </mat-form-field>
+  </div>
+</ng-container>

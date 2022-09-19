@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <mat-toolbar color="primary" class="header-ribbon">
+        <div>
+          <span>GPS Logo</span>
+        </div>
+        <div>
+          <span>Username</span>
+        </div>
+      </mat-toolbar>
+      <mat-toolbar color="accent" class="nav-menu">
+        <button mat-button routerLink="/">Home</button>
+        <button mat-button [matMenuTriggerFor]="procMenu">Procurement</button>
+        <mat-menu #procMenu="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="reqMenu">Requisitions</button>
+          <mat-menu #reqMenu="matMenu">
+            <button mat-menu-item>All Requisitions</button>
+            <button mat-menu-item>My Draft Requisitions</button>
+            <button mat-menu-item routerLink="requisition/entry">Requisition Entry</button>
+            <button mat-menu-item routerLink="posts/entry">Post Entry</button>
+          </mat-menu>
+          <button mat-menu-item [matMenuTriggerFor]="solicitationMenu">
+            Solicitations
+          </button>
+          <mat-menu #solicitationMenu="matMenu">
+            <button mat-menu-item>All Solicitations</button>
+            <button mat-menu-item>Draft Solicitations</button>
+            <button mat-menu-item>Approved, Awaiting Solicitation</button>
+          </mat-menu>
+          <button mat-menu-item [matMenuTriggerFor]="contractMenu">
+            Contracts
+          </button>
+          <mat-menu #contractMenu="matMenu">
+            <button mat-menu-item routerLink="contracts/all">All Contracts</button>
+            <button mat-menu-item>Draft Contracts</button>
+          </mat-menu>
+        </mat-menu>
+        <button mat-button>Grants</button>
+        <button mat-button [matMenuTriggerFor]="adminMenu">Admin</button>
+        <mat-menu #adminMenu="matMenu">
+          <button mat-menu-item routerLink="/users">User Management</button>
+        </mat-menu>
+      </mat-toolbar>
+    </header>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </body>
+</html>

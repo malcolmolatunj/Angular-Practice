@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "contractNumber": "I1988",
+    "vendor": "Bruvita Guest house",
+    "type": "PO",
+    "createdDate": "2/15/2022",
+    "amountUSD": 1979.21,
+    "amount": 28500,
+    "managerId": 1,
+    "officeId": 3,
+    "statusId": 1,
+    "ceiling": 28500,
+    "currencyId": 2,
+    "languageId": 1,
+    "isAutoRenewed": false,
+    "isVendorTemplateUsed": false,
+    "shippingCharges": 0,
+    "taxAmount": 0
+  },
+  {
+    "id": 2,
+    "contractNumber": "H7389",
+    "title": "Maziba HCIV Renovation works",
+    "vendor": "EXTECH TECHNICAL SERVICES LIMITED",
+    "type": "FFP",
+    "createdDate": "9/26/2021",
+    "startDate": "11/1/2021",
+    "endDate": "6/30/2022",
+    "amountUSD": 15150.73,
+    "amount": 53726004,
+    "managerId": 2,
+    "officeId": 4,
+    "statusId": 4,
+    "ceiling": 53726004,
+    "currencyId": 8,
+    "languageId": 1,
+    "isAutoRenewed": false,
+    "isVendorTemplateUsed": false,
+    "shippingCharges": 0,
+    "taxAmount": 0
+  }
+]

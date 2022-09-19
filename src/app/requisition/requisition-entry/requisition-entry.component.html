@@ -1,0 +1,48 @@
+<form [formGroup]="reqForm" (submit)="onSave()" (reset)="onClear()">
+  <mat-toolbar class="header">
+    <mat-toolbar-row class="spaced-content">
+      <div>Requisition Entry</div>
+      <div class="button-container">
+        <button mat-raised-button color="accent" type="submit">Save</button>
+        <button mat-raised-button color="accent" type="reset">Clear</button>
+        <button mat-raised-button color="accent" type="button">
+          Submit Request
+        </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <section>
+    <app-requisition-header
+      formGroupName="reqHeaderForm"
+    ></app-requisition-header>
+  </section>
+  <section>
+    <div class="button-container align-right mr-20">
+      <button
+        mat-raised-button
+        color="accent"
+        type="button"
+        (click)="openCreateItemsDialog()"
+      >
+        Create Item(s)
+      </button>
+      <button mat-raised-button color="accent" type="button">
+        Item Picker
+      </button>
+    </div>
+    <app-requisition-lines></app-requisition-lines>
+  </section>
+</form>
+<section>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header> Attachment List </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>Attachment Panel works!</ng-template>
+  </mat-expansion-panel>
+</section>
+<section>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header> Discussion </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>Discussion works!</ng-template>
+  </mat-expansion-panel>
+</section>
+<!-- <pre>{{ reqForm.value | json }}</pre> -->

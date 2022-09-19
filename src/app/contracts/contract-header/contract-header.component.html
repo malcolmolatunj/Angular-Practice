@@ -1,0 +1,106 @@
+<ng-container [formGroup]="parentForm">
+  <ng-container [formGroupName]="formGroupName">
+    <mat-form-field>
+      <mat-label>Contract #</mat-label>
+      <input matInput disabled />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contract Name</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Vendor Name</mat-label>
+      <input matInput formControlName="vendor" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contract Type</mat-label>
+      <mat-select required formControlName="type">
+        <mat-option></mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Procuring for Office Address</mat-label>
+      <mat-select required formControlName="office">
+        <mat-option
+          *ngFor="let office of offices$ | async"
+          [value]="office.id"
+          >{{ office.name }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contract Manager</mat-label>
+      <mat-select required formControlName="manager">
+        <mat-option *ngFor="let user of users$ | async" [value]="user.id"
+          >{{ user.firstName }} {{ user.lastName }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contract Currency</mat-label>
+      <mat-select required formControlName="currency">
+        <mat-option
+          *ngFor="let currency of currencies$ | async"
+          [value]="currency.id"
+          >{{ currency.code }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Language of Outbound Document(s)</mat-label>
+      <mat-select required formControlName="language">
+        <mat-option *ngFor="let lang of languages$ | async" [value]="lang.id">{{
+          lang.name
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Total Contract Amount</mat-label>
+      <input matInput disabled />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Total Contract Amount (USD)</mat-label>
+      <input matInput disabled />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Program Point of Contact</mat-label>
+      <mat-select formControlName="programPOC">
+        <mat-option *ngFor="let user of users$ | async" [value]="user.id"
+          >{{ user.firstName }} {{ user.lastName }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="isVendorTemplateUsed"
+      >Use Contractor's Template</mat-checkbox
+    >
+
+    <mat-form-field>
+      <mat-label>Collaborators</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip
+          *ngFor="let collab of collaborators.value; let idx = index"
+          (removed)="remove(collab)"
+          >{{ collab }}
+          <button matChipRemove><mat-icon>cancel</mat-icon></button>
+        </mat-chip>
+        <input
+          [matChipInputFor]="chipList"
+          matChipInputAddOnBlur="true"
+          [matChipInputSeparatorKeyCodes]="separatorKeyCodes"
+          (matChipInputTokenEnd)="addCollaborator($event)"
+        />
+      </mat-chip-list>
+    </mat-form-field>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "countryid": 1,
+    "name": "Yaounde"
+  },
+  {
+    "id": 2,
+    "countryid": 2,
+    "name": "Kinshasa"
+  },
+  {
+    "id": 3,
+    "countryid": 3,
+    "name": "Maseru"
+  },
+  {
+    "id": 4,
+    "countryid": 4,
+    "name": "Mbarara"
+  }
+]

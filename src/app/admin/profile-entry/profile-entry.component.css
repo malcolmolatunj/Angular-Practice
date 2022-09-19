@@ -1,0 +1,10 @@
+.header {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background-color: white;
+}
+
+button {
+  margin: 7px 3.5px;
+}

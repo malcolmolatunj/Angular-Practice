@@ -1,0 +1,156 @@
+<mat-toolbar class="header">
+  <mat-toolbar-row class="spaced-content">
+    <div>All Contracts</div>
+  </mat-toolbar-row>
+  <mat-toolbar-row class="align-right">
+    <form [formGroup]="searchForm">
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status">
+          <mat-option [value]="1">Open Contracts</mat-option>
+          <mat-option [value]="2">Closed Contracts</mat-option>
+          <mat-option [value]="3">All Contracts</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Department</mat-label>
+        <mat-select>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Funding Source</mat-label>
+        <mat-select>
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Contract Manager</mat-label>
+        <mat-select formControlName="manager">
+          <mat-option></mat-option>
+          <mat-option *ngFor="let user of managers$ | async" [value]="user.id"
+            >{{ user.firstName }} {{ user.lastName }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="country">
+          <mat-option></mat-option>
+          <mat-option
+            *ngFor="let ctry of countries$ | async"
+            [value]="ctry.id"
+            >{{ ctry.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input type="search" matInput />
+      </mat-form-field>
+    </form>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div *ngIf="contracts$ | async as contracts; else loading">
+  <table mat-table matSort [dataSource]="contracts">
+    <ng-container [matColumnDef]="col" *ngFor="let col of unChangedColumns">
+      <th class="column" mat-header-cell *matHeaderCellDef>
+        {{ columnNameMap[col] }}
+      </th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract[col] }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contractNumber">
+      <th class="column" mat-header-cell *matHeaderCellDef>Contract #</th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        <a
+          *ngIf="contract.statusId === 1"
+          [routerLink]="['/contracts/entry', contract.id]"
+          >{{ contract.contractNumber }}</a
+        >
+        <a *ngIf="contract.statusId > 1">{{ contract.contractNumber }}</a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="managerName">
+      <th class="column" mat-header-cell *matHeaderCellDef>Contract Manager</th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.manager.firstName }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="officeName">
+      <th class="column" mat-header-cell *matHeaderCellDef>Office</th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.office.name }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdDate">
+      <th class="column" mat-header-cell *matHeaderCellDef>Created Date</th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.createdDate | formattedDate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startDate">
+      <th class="column" mat-header-cell *matHeaderCellDef>Start Date</th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.startDate | formattedDate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endDate">
+      <th class="column" mat-header-cell *matHeaderCellDef>End Date</th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.endDate | formattedDate }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amountUSD">
+      <th
+        class="column"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+        sortActionDescription="Sort by USD amount"
+      >
+        Total Contract Amount (USD)
+      </th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.amountUSD | intlCurrency: 'USD':'symbol' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th
+        class="column"
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-headersortActionDescription="Sort by local currency amount"
+      >
+        Total Contract Amount
+      </th>
+      <td class="column" mat-cell *matCellDef="let contract">
+        {{ contract.amount | intlCurrency: contract.currencyCode }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>
+  </table>
+  <mat-paginator
+    color="accent"
+    [length]="contracts.length"
+    [pageSize]="(user$ | async).pageSize"
+    [pageSizeOptions]="[5, 10, 50, 100]"
+    aria-label="Select page"
+  ></mat-paginator>
+</div>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>
