@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PostsService } from '../service/posts.service';
 
 @Component({
@@ -13,25 +14,46 @@ import { PostsService } from '../service/posts.service';
   templateUrl: './post-entry.component.html',
   styleUrls: ['./post-entry.component.css'],
 })
-export class PostEntryComponent implements OnInit {
+export class PostEntryComponent implements OnInit, OnDestroy {
   postForm: FormGroup;
   postId: number;
+  selectorForm: FormGroup;
+  selectionSubscription: Subscription;
+  forms: { [key: string]: { [key: string]: any } } = {
+    A: {
+      title: [null, Validators.required],
+      userId: [1],
+    },
+    B: {
+      title: [null, Validators.required],
+      body: [null, Validators.required],
+      userId: [1],
+    },
+  };
 
   constructor(
     private fb: FormBuilder,
     private ps: PostsService,
-    private router: Router,
+    private router: Router
   ) {}
 
+  ngOnDestroy(): void {
+    this.selectionSubscription.unsubscribe();
+  }
+
   ngOnInit() {
-    this.postForm = this.fb.group(
-      {
-        title: [null, Validators.required],
-        body: [null, Validators.required],
-        userId: [1],
-      },
-      { updateOn: 'submit' }
+    this.selectorForm = this.fb.group({
+      formId: [],
+    });
+    this.selectionSubscription = this.selectorForm.get('formId').valueChanges.subscribe(
+      (id) => {
+        this.postForm = this.fb.group(this.forms[id], { updateOn: 'submit' });
+      }
     );
+  }
+
+  isFormPristine(): boolean {
+    return this.postForm.pristine;
   }
 
   get title(): AbstractControl {
@@ -49,10 +71,12 @@ export class PostEntryComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.postForm.markAllAsTouched();
     if (this.postForm.valid) {
-      this.ps.savePost(this.postForm.value).subscribe((post) => {
-        this.router.navigate(['/posts/', 1])
-      });
+      console.log(this.postForm.value);
+      // this.ps.savePost(this.postForm.value).subscribe((post) => {
+      //   this.router.navigate(['/posts/', 1]);
+      // });
     }
   }
 }

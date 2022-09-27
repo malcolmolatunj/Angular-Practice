@@ -41,6 +41,7 @@ const routes: Routes = [
   {
     path: 'posts/entry',
     component: PostEntryComponent,
+    canDeactivate: [CanDeactivateDirtyFormGuard]
   },
   {
     path: 'posts/:id',

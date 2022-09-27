@@ -1,11 +1,26 @@
-<form [formGroup]="postForm" (submit)="onSubmit()" (reset)="onClear()">
+<form [formGroup]="selectorForm">
   <mat-form-field>
+    <mat-label>Form Type</mat-label>
+    <mat-select required formControlName="formId">
+      <mat-option value="A">Title Only</mat-option>
+      <mat-option value="B">Title & Body</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+
+<form
+  *ngIf="postForm"
+  [formGroup]="postForm"
+  (submit)="onSubmit()"
+  (reset)="onClear()"
+>
+  <mat-form-field *ngIf="title">
     <mat-label>Title</mat-label>
     <input matInput required formControlName="title" />
     <mat-error *ngIf="title.errors?.required">Title is required.</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field *ngIf="body">
     <mat-label>Body</mat-label>
     <textarea matInput required formControlName="body"></textarea>
   </mat-form-field>
