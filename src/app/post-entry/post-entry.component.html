@@ -23,8 +23,10 @@
   <mat-form-field *ngIf="body">
     <mat-label>Body</mat-label>
     <textarea matInput required formControlName="body"></textarea>
+    <mat-error *ngIf="body.errors?.required">Body is required.</mat-error>
   </mat-form-field>
 
   <button mat-raised-button color="accent" type="submit">Save</button>
   <button mat-raised-button color="accent" type="reset">Clear</button>
 </form>
+<app-post-list></app-post-list>

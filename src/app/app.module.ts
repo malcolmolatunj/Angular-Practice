@@ -16,6 +16,7 @@ import { RequisitionLinesComponent } from './requisition/requisition-lines/requi
 import { CreateItemsComponent } from './requisition/create-items/create-items.component';
 import { PostEntryComponent } from './post-entry/post-entry.component';
 import { PostDetailComponent } from './post-detail/post-detail.component';
+import { PostListComponent } from './post-list/post-list.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { PostDetailComponent } from './post-detail/post-detail.component';
     CreateItemsComponent,
     PostEntryComponent,
     PostDetailComponent,
+    PostListComponent
   ],
   bootstrap: [AppComponent]
 })
