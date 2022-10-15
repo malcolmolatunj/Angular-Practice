@@ -2,8 +2,11 @@ mat-form-field {
   margin: 10px;
 }
 
-form {
+app-post-entry {
   background-color: white;
   padding: 10px;
+}
+
+form {
   margin-top: 30px 10px;
 }
