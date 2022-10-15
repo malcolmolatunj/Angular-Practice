@@ -1,0 +1,5 @@
+<ul>
+<li *ngFor="let post of posts$ | async; trackBy: trackByFn">
+  {{ post.title }}<span *ngIf="post.body">, </span>{{ post.body }}
+</li>
+</ul>
