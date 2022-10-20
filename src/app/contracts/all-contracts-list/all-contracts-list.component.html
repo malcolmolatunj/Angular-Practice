@@ -57,9 +57,9 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <div *ngIf="contracts$ | async as contracts; else loading">
-  <table mat-table matSort [dataSource]="contracts">
+  <table mat-table matSort [dataSource]="dataSource">
     <ng-container [matColumnDef]="col" *ngFor="let col of unChangedColumns">
-      <th class="column" mat-header-cell *matHeaderCellDef>
+      <th class="column" mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ columnNameMap[col] }}
       </th>
       <td class="column" mat-cell *matCellDef="let contract">
@@ -133,6 +133,7 @@
         class="column"
         mat-header-cell
         *matHeaderCellDef
+        mat-sort-header
         mat-sort-headersortActionDescription="Sort by local currency amount"
       >
         Total Contract Amount

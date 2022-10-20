@@ -1,7 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { tap, switchMap, startWith } from 'rxjs/operators';
+import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { Contract, Country, User } from '../../models';
 import { AuthService } from '../../service/auth.service';
 import { CommonService } from '../../service/common.service';
@@ -14,19 +22,17 @@ import { ContractService } from '../contract.service';
   styleUrls: ['./all-contracts-list.component.css'],
 })
 export class AllContractsListComponent implements OnInit {
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   contracts$: Observable<Contract[]>;
   user$: Observable<User>;
   countries$: Observable<Country[]>;
   managers$: Observable<User[]>;
 
   searchForm: FormGroup;
+  dataSource: MatTableDataSource<Contract>;
 
-  unChangedColumns = [
-    'title',
-    'vendor',
-    'type',
-    'statusDescription',
-  ];
+  unChangedColumns = ['title', 'vendor', 'type', 'statusDescription'];
 
   columnsToDisplay = [
     'contractNumber',
@@ -69,12 +75,35 @@ export class AllContractsListComponent implements OnInit {
       dept: [],
       project: [],
       manager: [],
-      country: []
-    })
+      country: [],
+    });
 
     this.contracts$ = this.searchForm.valueChanges.pipe(
       startWith([]),
-      switchMap(value => this.contractService.getAllContractsWithReferences(value))
-    )
+      switchMap((value) =>
+        this.contractService.getAllContractsWithReferences(value)
+      ),
+      tap((contracts) => {
+        this.dataSource = new MatTableDataSource(contracts);
+        this.dataSource.sortingDataAccessor = (item, header) => {
+          switch (header) {
+            case 'amountUSD':
+              return 'Total Contract Amount (USD)';
+            case 'amount':
+              return 'Total Contract Amount';
+            default:
+              return item[header];
+          }
+        };
+        this.dataSource.sort = this.sort;
+      })
+    );
+  }
+
+  sortData(sort: Sort): void {
+    if (!sort.active || sort.direction === '') {
+      return;
+    }
+    
   }
 }
