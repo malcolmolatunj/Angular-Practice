@@ -57,7 +57,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <div *ngIf="contracts$ | async as contracts; else loading">
-  <table mat-table matSort [dataSource]="dataSource">
+  <table mat-table matSort [dataSource]="sortedData ?? contracts$ | async" (matSortChange)="sortData($event)">
     <ng-container [matColumnDef]="col" *ngFor="let col of unChangedColumns">
       <th class="column" mat-header-cell *matHeaderCellDef mat-sort-header>
         {{ columnNameMap[col] }}

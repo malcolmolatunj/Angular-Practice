@@ -8,7 +8,7 @@ import {
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { tap, switchMap, startWith, map } from 'rxjs/operators';
 import { Contract, Country, User } from '../../models';
 import { AuthService } from '../../service/auth.service';
@@ -22,15 +22,14 @@ import { ContractService } from '../contract.service';
   styleUrls: ['./all-contracts-list.component.css'],
 })
 export class AllContractsListComponent implements OnInit {
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
-
+  contractsSubject$: Subject<Contract[]> = new Subject<Contract[]>();
   contracts$: Observable<Contract[]>;
   user$: Observable<User>;
   countries$: Observable<Country[]>;
   managers$: Observable<User[]>;
 
   searchForm: FormGroup;
-  dataSource: MatTableDataSource<Contract>;
+  sortedData: Observable<Contract[]>;
 
   unChangedColumns = ['title', 'vendor', 'type', 'statusDescription'];
 
@@ -77,33 +76,49 @@ export class AllContractsListComponent implements OnInit {
       manager: [],
       country: [],
     });
-
     this.contracts$ = this.searchForm.valueChanges.pipe(
       startWith([]),
       switchMap((value) =>
         this.contractService.getAllContractsWithReferences(value)
       ),
       tap((contracts) => {
-        this.dataSource = new MatTableDataSource(contracts);
-        this.dataSource.sortingDataAccessor = (item, header) => {
-          switch (header) {
-            case 'amountUSD':
-              return 'Total Contract Amount (USD)';
-            case 'amount':
-              return 'Total Contract Amount';
-            default:
-              return item[header];
-          }
-        };
-        this.dataSource.sort = this.sort;
+        this.contractsSubject$.next(contracts);
       })
     );
   }
 
+  compare(a: number | string, b: number | string, isAsc: boolean): number {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+  }
   sortData(sort: Sort): void {
     if (!sort.active || sort.direction === '') {
       return;
     }
-    
+    this.sortedData = this.contracts$.pipe(
+      map((contracts) => {
+        return contracts.sort((a, b) => {
+          const isAsc = sort.direction === 'asc';
+          switch (sort.active) {
+            case 'amount':
+              return this.compare(a.amount, b.amount, isAsc);
+            case 'amountUSD':
+              return this.compare(a.amountUSD, b.amountUSD, isAsc);
+            case 'vendor':
+              return this.compare(a.vendor, b.vendor, isAsc);
+            case 'contractNumber':
+              return this.compare(a.contractNumber, b.contractNumber, isAsc);
+            case 'title':
+              return this.compare(a.title, b.title, isAsc);
+            case 'type':
+              return this.compare(a.type, b.type, isAsc);
+            default:
+              return 0;
+          }
+        });
+      }),
+      tap((contracts) => {
+        this.contractsSubject$.next(contracts);
+      })
+    );
   }
 }
