@@ -77,7 +77,7 @@ export class AllContractsListComponent implements OnInit {
       country: [],
     });
     this.contracts$ = this.searchForm.valueChanges.pipe(
-      startWith([]),
+      startWith(this.searchForm.value),
       switchMap((value) =>
         this.contractService.getAllContractsWithReferences(value)
       ),
